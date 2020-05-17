@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Boneless Caviar</title>
+{% endblock %}
+
+{% block body %}
+<div class="content" style="text-align:center;">
+
+    <h1>Eventos</h1>
+    {% if events|length == 0 %}
+    <h3>No hay ningún evento agendado</h3>
+    {% else %}
+    <table align="center">
+        <tr>
+            <th>Evento</th>
+            <th>Creado</th>
+            <th>Opciones</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <th>{{ event.event }}</th>
+                <th>{{ event.date_created.date() }}</th>
+                <th>
+                    <a href="/delete/{{ event.id }}">Eliminar</a>
+                    <br>
+                    <a href="/update/{{ event.id }}">Actualizar</a>
+                </th>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action="/" method="POST">
+        <input type="text" name="event" id="event">
+        <input type="submit" value="Agregar Evento">
+    </form>
+</div>
+</div>
+{% endblock %}
